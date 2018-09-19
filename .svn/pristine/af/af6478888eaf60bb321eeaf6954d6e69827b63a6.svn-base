@@ -1,0 +1,91 @@
+<?php
+/**
+ * Template Name: homepage
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site may use a
+ * different template.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package biking_tour
+ */
+
+get_header();
+while(have_posts()): the_post();
+?>
+
+<!-- biking-tour-banner-section -->
+<section class="biking_tour_banner_wrap" style="background-image: url(<?php the_field('hompage_banner_bk_image'); ?>);">
+
+	<?php do_action('biking_tour_header_sec_fnc','biking_tour'); ?>
+
+	<!-- biking-tour-homepage-header-section -->
+	<section class="biking_tour_homepage_header_wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<figure>
+						<img src="<?php the_field('hompage_banner_front_image') ?>">
+					</figure>
+					<h2><?php the_field('hompage_banner_main_title'); ?></h2>
+					<?php the_field('hompage_banner_text'); ?>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</section>
+
+<!-- biking-tour-homepage-guided-tour-section -->
+<section class="biking_tour_homepage_guided_tour_wrap"> 
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<?php the_field('guided_tour_section_date'); ?>
+				<h2><?php the_field('guided_tour_section_title'); ?></h2>
+				<?php the_field('guided_tour_section_content'); ?>
+			</div>
+			<div class="col-md-6">
+				<img src="<?php the_field('guided_tour_section_image'); ?>">
+			</div>	  
+		</div>
+	</div>
+</section>
+
+<!-- biking-tour-homepage-holiday-packages-section -->
+<section class="biking_tour_homepage_holiday_packages_wrap"> 
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2><?php the_field('holiday_packages_main_title'); ?></h2>
+				<?php the_field('holiday_packages_top_text'); ?>
+			</div>  
+		</div>
+		<div class="row">
+			<?php $biking_posts = new WP_Query(array( 'post_type' => ' ' , 'posts_per_page' =>  '6' ));
+			if($biking_posts -> have_posts()): 
+				while($biking_posts -> have_posts()): $biking_posts -> the_post(); ?>
+					<div class="col-md-4">
+						<figure>
+							<img src="<?php the_post_thumbnail_url(); ?>">
+						</figure>
+						<?php the_category(); ?>
+						<h2><?php the_title(); ?></h2>
+						 <?php the_field(''); ?><?php the_field(''); ?>
+					</div>
+			<?php endwhile; endif; ?>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+
+
+<?php
+endwhile;
+get_footer();
