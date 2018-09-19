@@ -15,7 +15,6 @@
 get_header();
 while(have_posts()): the_post();
 ?>
-this is homepage
 <!-- biking-tour-banner-section -->
 <section class="biking_tour_banner_wrap" style="background-image: url(<?php the_field('hompage_banner_bk_image'); ?>);">
 
